@@ -17,10 +17,7 @@ Baixe o projeto e instale as bibliotecas necessárias:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU_USUARIO_GITHUB/NOME_DO_REPO.git
-
-# Entre na pasta
-cd NOME_DO_REPO
+git clone https://github.com/Leo-fcdev/Confeitaria-DGL.git
 
 # Instale as dependências
 npm install
