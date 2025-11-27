@@ -7,7 +7,7 @@ const InsumoSchema =  new mongoose.Schema({
     },
     unidade: {
         type: String,
-        required: true
+        requerid: true
     },
     preco: {
         type: Number,
