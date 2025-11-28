@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Insumos from './pages/Insumos';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+// Página Home simples só pra não dar erro 404
+function Home() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+    <div className="container">
+      <h1>🎂 Confeitaria DGL</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <p>Bem-vindo ao sistema de gestão.</p>
+        <p>Selecione uma opção no menu.</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+// Página Produtos simples (Placeholderr)
+function Produtos() {
+    return <div className="container"><h1>🍰 Cardápio</h1><p>Em construção...</p></div>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      {/* O Navbar fica fora das Routes para aparecer em todas as telas */}
+      <Navbar />
+      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/insumos" element={<Insumos />} />
+        <Route path="/produtos" element={<Produtos />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
