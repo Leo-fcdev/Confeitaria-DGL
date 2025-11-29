@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// informando a porta que vai puxar 
+//aponta para o Backend na porta 3001
 const api = axios.create({
   baseURL: 'http://localhost:3001', 
 });

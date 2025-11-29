@@ -44,6 +44,3 @@ export const calcularMargemLucroProdutos = (produtos, insumos) => {
         };
     });
 };
-
-
-//

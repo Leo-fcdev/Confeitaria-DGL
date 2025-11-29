@@ -1,18 +1,17 @@
-import api from '../api/api'; // CORRIGIDO: Aponta para o arquivo api.js
+import api from '../api/api';
 
 const InsumoService = {
-    // Rota GET pros insumos
+    // Rota GET /insumos
     buscarTodos: async () => {
         const response = await api.get('/insumos');
         return response.data;
     },
     
-    // Rota POST pros insumos insumos
+    // Rota POST /insumos
     cadastrar: async (novoInsumo) => {
         const response = await api.post('/insumos', novoInsumo);
         return response.data;
     }
-    
 };
 
 export default InsumoService;
