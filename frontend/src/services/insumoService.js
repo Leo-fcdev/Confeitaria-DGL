@@ -1,4 +1,4 @@
-import api from '../api';
+import api from '../api/api';
 
 const InsumoService = {
     // Rota GET pros insumos

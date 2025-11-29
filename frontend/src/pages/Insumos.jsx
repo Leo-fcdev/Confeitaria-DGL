@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import InsumoService from '../api/Services/insumoService';
+import InsumoService from "../services/insumoService";
 
 export default function Insumos() {
   const [insumos, setInsumos] = useState([]);

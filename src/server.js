@@ -24,7 +24,7 @@ app.use(routes)
 app.get('/', (req, res) => {
     res.send('O servidor backend está rodando!');
 });
-*/git 
+*/
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
