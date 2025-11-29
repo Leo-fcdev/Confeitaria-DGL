@@ -46,4 +46,4 @@ export const calcularMargemLucroProdutos = (produtos, insumos) => {
 };
 
 
-//att
+//
