@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Insumo = require('./models/Insumo')
+const Insumo = require('./models/Insumo');
 const Produto = require('./models/Produto');
 
 router.get('/insumos', async (req, res) => {

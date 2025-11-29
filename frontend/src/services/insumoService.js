@@ -1,4 +1,4 @@
-import api from '../api/api';
+import api from '../api/api'; // CORRIGIDO: Aponta para o arquivo api.js
 
 const InsumoService = {
     // Rota GET pros insumos

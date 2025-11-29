@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import InsumoService from "../services/insumoService";
+import InsumoService from '../services/insumoService'; // CAMINHO CORRIGIDO
 
 export default function Insumos() {
   const [insumos, setInsumos] = useState([]);
@@ -8,6 +8,7 @@ export default function Insumos() {
   useEffect(() => {
     async function loadData() {
       try {
+        // Usa sua função de serviço para GET /insumos
         const dados = await InsumoService.buscarTodos();
         setInsumos(dados);
       } catch (error) {

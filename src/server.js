@@ -20,12 +20,6 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use(routes)
 
-/*
-app.get('/', (req, res) => {
-    res.send('O servidor backend está rodando!');
-});
-*/
-
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`)
