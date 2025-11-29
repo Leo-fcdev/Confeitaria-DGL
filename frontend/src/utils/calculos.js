@@ -1,44 +1,60 @@
-// Calcula o custo total de um produto com base em sua receita.
+// frontend/src/utils/calculos.js
+
+// Lógica de Precificação: Calcula o custo total de um produto.
 export const calcularCustoTotal = (ingredientesDaReceita, insumosDisponiveis) => {
+  // Defesa: Garante que os arrays são válidos para evitar erros no loop
+  if (!Array.isArray(ingredientesDaReceita) || !Array.isArray(insumosDisponiveis) || insumosDisponiveis.length === 0) {
+      return 0;
+  }
+    
   let custoTotal = 0;
 
   for (const item of ingredientesDaReceita) {
-    // Busca o insumo correspondente para obter o preço de custo
     const insumo = insumosDisponiveis.find(i => i._id === item.insumo_id);
     
-    if (insumo && insumo.preco) {
-        // Custo = Preço do Insumo x Quantidade necessária
-        const custoParcial = insumo.preco * item.qtd_necessaria;
+    if (insumo) {
+        // Defesa Rigorosa: parseFloat(valor) || 0 garante que null/''/undefined virem 0.
+        const precoCusto = parseFloat(insumo.preco) || 0;
+        const qtdNecessaria = parseFloat(item.qtd_necessaria) || 0; //
+
+        const custoParcial = precoCusto * qtdNecessaria;
         custoTotal += custoParcial;
     }
   }
-  return parseFloat(custoTotal.toFixed(2));
+  // Retorna o resultado seguro (sem NaN)
+  const resultado = parseFloat(custoTotal.toFixed(2));
+  return isNaN(resultado) ? 0 : resultado;
 };
 
-// Calcula o valor total investido no estoque.
+// ... restante das funções ...
+
 export const calcularValorTotalEstoque = (insumos) => {
+    if (!Array.isArray(insumos)) return 0;
+    
     let valorTotal = 0;
     
     insumos.forEach(insumo => {
-        // Cálculo: Preço de Custo x Quantidade em Estoque
-        valorTotal += insumo.preco * insumo.quantidade_estoque;
+        const preco = parseFloat(insumo.preco) || 0;
+        const estoque = parseFloat(insumo.quantidade_estoque) || 0;
+        valorTotal += preco * estoque;
     });
     
-    return parseFloat(valorTotal.toFixed(2));
+    const resultado = parseFloat(valorTotal.toFixed(2));
+    return isNaN(resultado) ? 0 : resultado;
 };
 
-// Calcula a margem de lucro de cada produto.
 export const calcularMargemLucroProdutos = (produtos, insumos) => {
+    if (!Array.isArray(produtos) || !Array.isArray(insumos)) return [];
+    
     return produtos.map(produto => {
-        // Usa a função central para obter o custo
         const custo = calcularCustoTotal(produto.ingredientes, insumos);
         
-        // Lucro = Preço de Venda - Custo
-        const lucro = produto.preco_venda - custo;
+        const precoVenda = parseFloat(produto.preco_venda) || 0;
+        const lucro = precoVenda - custo;
         
         return {
             nome: produto.nome,
-            preco_venda: produto.preco_venda,
+            preco_venda: precoVenda,
             custo: custo,
             lucro: parseFloat(lucro.toFixed(2))
         };
