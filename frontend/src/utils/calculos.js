@@ -1,8 +1,6 @@
 // frontend/src/utils/calculos.js
 
-// Lógica de Precificação: Calcula o custo total de um produto.
 export const calcularCustoTotal = (ingredientesDaReceita, insumosDisponiveis) => {
-  // Defesa: Garante que os arrays são válidos para evitar erros no loop
   if (!Array.isArray(ingredientesDaReceita) || !Array.isArray(insumosDisponiveis) || insumosDisponiveis.length === 0) {
       return 0;
   }
@@ -13,8 +11,8 @@ export const calcularCustoTotal = (ingredientesDaReceita, insumosDisponiveis) =>
     const insumo = insumosDisponiveis.find(i => i._id === item.insumo_id);
     
     if (insumo) {
-        // Defesa Rigorosa: parseFloat(valor) || 0 garante que null/''/undefined virem 0.
-        const precoCusto = parseFloat(insumo.preco) || 0;
+        // Defesa Rigorosa: Se o valor não for numérico, usa 0.
+        const precoCusto = parseFloat(insumo.preco) || 0; //
         const qtdNecessaria = parseFloat(item.qtd_necessaria) || 0; //
 
         const custoParcial = precoCusto * qtdNecessaria;
@@ -25,8 +23,6 @@ export const calcularCustoTotal = (ingredientesDaReceita, insumosDisponiveis) =>
   const resultado = parseFloat(custoTotal.toFixed(2));
   return isNaN(resultado) ? 0 : resultado;
 };
-
-// ... restante das funções ...
 
 export const calcularValorTotalEstoque = (insumos) => {
     if (!Array.isArray(insumos)) return 0;

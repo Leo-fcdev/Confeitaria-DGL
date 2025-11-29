@@ -19,9 +19,9 @@ export default function FormularioProduto() {
         loadInsumos();
     }, []);
 
-    // LÓGICA DE PRECIFICAÇÃO DINÂMICA (Gatilho de cálculo)
+    // LÓGICA DE PRECIFICAÇÃO DINÂMICA
     useEffect(() => {
-        // Chama a função de cálculo segura
+        // Chama a função de cálculo que agora é segura
         const novoCusto = calcularCustoTotal(receita, insumosDisponiveis); 
         setCustoCalculado(novoCusto); // Esta linha agora deve ser segura (novoCusto é sempre um número)
     }, [receita, insumosDisponiveis]); 
@@ -59,6 +59,7 @@ export default function FormularioProduto() {
         }
     };
     
+    // Funçao de teste para adicionar ingredientes
     const handleAddIngredient = () => {
         if (insumosDisponiveis.length > 0) {
              const primeiroInsumo = insumosDisponiveis[0];
