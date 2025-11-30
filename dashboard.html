@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DGL Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark px-3">
+    <a class="navbar-brand fw-bold">DGL Confeitaria</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menuNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="insumos.html" class="nav-link">Insumos</a></li>
+        <li class="nav-item"><a href="produtos.html" class="nav-link">Produtos</a></li>
+        <li class="nav-item"><a href="pedidos.html" class="nav-link">Pedidos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- METRICAS -->
+  <main class="container mt-4">
+    <h2 class="mb-3 fw-bold">Métricas do Mês</h2>
+
+    <div class="row mt-4" id="metricas">
+      <div class="col-12 col-md-4 mb-3">
+        <div class="card metric-card p-3 shadow-sm">
+          <h5>Vendas</h5>
+          <p id="metric-vendas" class="metric-value">0</p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 mb-3">
+        <div class="card metric-card p-3 shadow-sm">
+          <h5>Lucro</h5>
+          <p id="metric-lucro" class="metric-value">R$ 0,00</p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 mb-3">
+        <div class="card metric-card p-3 shadow-sm">
+          <h5>Pedidos Pendentes</h5>
+          <p id="metric-pendentes" class="metric-value">0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARDS DE NAVEGAÇÃO -->
+    <h2 class="mt-5 mb-3 fw-bold">Gerenciamento</h2>
+
+    <div class="row">
+      <div class="col-12 col-md-4 mb-3">
+        <a href="insumos.html" class="nav-card-link">
+          <div class="nav-card shadow-sm p-4 text-center">
+            <h4>📦 Insumos</h4>
+            <p>Controle seu estoque de ingredientes</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-md-4 mb-3">
+        <a href="produtos.html" class="nav-card-link">
+          <div class="nav-card shadow-sm p-4 text-center">
+            <h4>🍰 Produtos</h4>
+            <p>Gerencie o catálogo da confeitaria</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-md-4 mb-3">
+        <a href="pedidos.html" class="nav-card-link">
+          <div class="nav-card shadow-sm p-4 text-center">
+            <h4>🧾 Pedidos</h4>
+            <p>Registre e acompanhe pedidos</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

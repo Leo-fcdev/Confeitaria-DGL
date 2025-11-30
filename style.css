@@ -1,0 +1,26 @@
+:root {
+  --dgl-blue: #1e6fd6 !important;
+  --dgl-blue-dark: #0d47a1 !important;
+  --dgl-bg: #eef3fb !important;
+}
+
+body {
+  background: var(--dgl-bg) !important;
+}
+
+.navbar {
+  background: var(--dgl-blue) !important;
+}
+
+.navbar .nav-link {
+  color: #fff !important;
+}
+
+.btn-dgl {
+  background: var(--dgl-blue) !important;
+  color: #fff !important;
+}
+
+.btn-dgl:hover {
+  background: var(--dgl-blue-dark) !important;
+}
