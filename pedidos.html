@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pedidos – DGL</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -17,13 +17,27 @@
 
     <div class="card p-3 shadow-sm mb-4">
       <h4>Novo Pedido</h4>
-      <input id="cliente" class="form-control mt-2" placeholder="Cliente">
-      <input id="produto" class="form-control mt-2" placeholder="Produto">
-      <input id="valor" class="form-control mt-2" placeholder="Valor total">
+      
+      <input id="cliente" class="form-control mt-2" placeholder="Nome do Cliente">
 
-      <button class="btn btn-dgl mt-3" onclick="addPedido()">Salvar</button>
+      <div class="d-flex gap-2 mt-2">
+        <select id="select-produto" class="form-select">
+          <option value="">Carregando produtos...</option>
+        </select>
+        <button class="btn btn-secondary" onclick="adicionarItemAoPedido()">Adicionar</button>
+      </div>
+
+      <div class="mt-3">
+        <h6>Itens do Pedido:</h6>
+        <ul id="lista-itens-carrinho" class="list-group mb-2">
+          </ul>
+        <h4 class="text-end">Total: R$ <span id="total-valor">0.00</span></h4>
+      </div>
+
+      <button class="btn btn-dgl mt-3 w-100" onclick="salvarPedido()">Finalizar Pedido</button>
     </div>
 
+    <h4 class="mb-3">Histórico de Pedidos</h4>
     <ul id="lista-pedidos" class="list-group shadow-sm"></ul>
 
     <a href="dashboard.html" class="btn btn-secondary mt-4">Voltar</a>
