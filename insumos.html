@@ -9,22 +9,36 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark px-3">
-    <h1 class="text-white">Insumos</h1>
+  <nav class="navbar navbar-expand-lg navbar-light px-3">
+    <h1 class="navbar-brand">Insumos</h1>
   </nav>
 
   <main class="container mt-4">
 
     <div class="card p-3 shadow-sm mb-4">
       <h4>Adicionar Insumo</h4>
-      <input id="nome" class="form-control mt-2" placeholder="Nome do insumo">
-      <input id="quantidade" class="form-control mt-2" placeholder="Quantidade">
-      <input id="unidade" class="form-control mt-2" placeholder="Unidade (ex: kg, g)">
+      <input id="nome" class="form-control mt-2" placeholder="Nome do insumo (ex: Leite)">
       
-      <input id="preco" type="number" class="form-control mt-2" placeholder="Preço pago (R$)">
-      <small class="text-muted">Informe o preço total pago por essa quantidade.</small>
+      <div class="row mt-2">
+        <div class="col-6">
+            <input id="quantidade" type="number" class="form-control" placeholder="Quantidade em Estoque">
+        </div>
+        <div class="col-6">
+            <select id="unidade" class="form-select">
+                <option value="" selected disabled>Selecione a Unidade</option>
+                <option value="kg">Quilograma (kg)</option>
+                <option value="g">Grama (g)</option>
+                <option value="L">Litro (L)</option>
+                <option value="ml">Mililitro (ml)</option>
+                <option value="un">Unidade (un)</option>
+            </select>
+        </div>
+      </div>
 
-      <button class="btn btn-dgl mt-3" onclick="addInsumo()">Salvar</button>
+      <input id="preco" type="number" step="0.01" class="form-control mt-2" placeholder="Preço unitário (R$)">
+      <small class="text-muted">Informe o valor de 1 unidade de medida (ex: preço de 1 kg).</small>
+
+      <button class="btn btn-dgl mt-3" onclick="addInsumo()">Salvar no Estoque</button>
     </div>
 
     <ul id="lista-insumos" class="list-group shadow-sm"></ul>

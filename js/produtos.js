@@ -1,12 +1,12 @@
 let insumosDisponiveis = [];
-let receitaAtual = []; // Lista de insumos selecionados para este produto
+let receitaAtual = []; 
 
 document.addEventListener("DOMContentLoaded", () => {
     carregarProdutos();
     carregarOpcoesInsumos();
 });
 
-// Busca os produtos já cadastrados
+// Carrega a lista de produtos cadastrados
 async function carregarProdutos() {
     const produtos = await fetchAPI("/produtos");
     const lista = document.getElementById("lista-produtos");
@@ -16,7 +16,6 @@ async function carregarProdutos() {
         const item = document.createElement("li");
         item.className = "list-group-item d-flex justify-content-between align-items-center";
         
-        // Se o backend calculou o custo, mostramos
         const custoTexto = prod.custo ? `(Custo: R$ ${prod.custo.toFixed(2)})` : '';
 
         item.innerHTML = `
@@ -30,7 +29,7 @@ async function carregarProdutos() {
     });
 }
 
-// Busca insumos para preencher o Select
+// Carrega insumos para o select
 async function carregarOpcoesInsumos() {
     insumosDisponiveis = await fetchAPI("/insumos");
     const select = document.getElementById("select-insumo");
@@ -39,13 +38,12 @@ async function carregarOpcoesInsumos() {
     insumosDisponiveis.forEach(ins => {
         const option = document.createElement("option");
         option.value = ins._id;
-        // Mostra o nome e a unidade (ex: Farinha (kg))
-        option.textContent = `${ins.nome} (${ins.unidade}) - Disp: ${ins.quantidade}`;
+        option.textContent = `${ins.nome} (${ins.unidade}) - R$ ${ins.preco ? ins.preco.toFixed(2) : '0.00'}/${ins.unidade}`;
         select.appendChild(option);
     });
 }
 
-// Adiciona ingrediente na lista temporária (Receita)
+// Adiciona insumo na lista temporária da receita
 function addInsumoNaReceita() {
     const select = document.getElementById("select-insumo");
     const id = select.value;
@@ -55,19 +53,19 @@ function addInsumoNaReceita() {
 
     const insumoReal = insumosDisponiveis.find(i => i._id === id);
 
-    // Adiciona na receita
     receitaAtual.push({
         id: id,
         nome: insumoReal.nome,
         quantidade: qtd,
-        precoBase: insumoReal.preco,
-        qtdBase: insumoReal.quantidade
+        precoUnitario: insumoReal.preco,
+        unidade: insumoReal.unidade
     });
 
     atualizarReceitaVisual();
     document.getElementById("qtd-uso").value = "";
 }
 
+// Atualiza a visualização da receita e custo estimado
 function atualizarReceitaVisual() {
     const lista = document.getElementById("lista-receita");
     const spanCusto = document.getElementById("custo-estimado");
@@ -76,18 +74,13 @@ function atualizarReceitaVisual() {
     let custoTotal = 0;
 
     receitaAtual.forEach((item, index) => {
-        // Cálculo do custo proporcional
-        // (Preço Pago / Qtd Total Comprada) * Qtd Usada
-        let custoItem = 0;
-        if (item.precoBase && item.qtdBase) {
-            custoItem = (item.precoBase / item.qtdBase) * item.quantidade;
-        }
+        const custoItem = (item.precoUnitario || 0) * item.quantidade;
         custoTotal += custoItem;
 
         const li = document.createElement("li");
         li.className = "list-group-item d-flex justify-content-between py-1";
         li.innerHTML = `
-            <small>${item.nome}: ${item.quantidade}</small>
+            <small>${item.nome}: ${item.quantidade} ${item.unidade}</small>
             <small class="text-muted">R$ ${custoItem.toFixed(2)}</small>
             <button class="btn btn-sm text-danger p-0" onclick="removerItem(${index})">x</button>
         `;
@@ -102,6 +95,7 @@ function removerItem(index) {
     atualizarReceitaVisual();
 }
 
+// Envia os dados do produto e receita para o backend
 async function salvarProduto() {
     const nome = document.getElementById("produto-nome").value;
     const precoVenda = document.getElementById("produto-preco").value;
@@ -111,20 +105,19 @@ async function salvarProduto() {
     const payload = {
         nome,
         precoVenda: parseFloat(precoVenda),
-        insumosUsados: receitaAtual // Envia a lista de ingredientes para o backend dar baixa
+        insumosUsados: receitaAtual 
     };
 
     await fetchAPI("/produtos", "POST", payload);
 
-    alert("Produto cadastrado e estoque atualizado!");
+    alert("Produto cadastrado com sucesso!");
     
-    // Limpar tudo
     document.getElementById("produto-nome").value = "";
     document.getElementById("produto-preco").value = "";
     receitaAtual = [];
     atualizarReceitaVisual();
     carregarProdutos();
-    carregarOpcoesInsumos(); // Recarrega insumos para pegar o estoque atualizado
+    carregarOpcoesInsumos(); 
 }
 
 async function deletarProduto(id) {
